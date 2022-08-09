@@ -1,5 +1,5 @@
 {
-  "name": "ratemyucsb",
+  "name": "ratemysbroom",
   "version": "1.0.0",
   "description": "App to rate housing at UCSB",
   "main": "server.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/timothychichang/RateMyUCSB.git"
+    "url": "git+https://github.com/timothychichang/RateMySBRoom.git"
   },
   "author": "Tim Chang",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/timothychichang/RateMyUCSB/issues"
+    "url": "https://github.com/timothychichang/RateMySBRoom/issues"
   },
-  "homepage": "https://github.com/timothychichang/RateMyUCSB#readme",
+  "homepage": "https://github.com/timothychichang/RateMySBRoom#readme",
   "dependencies": {
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
