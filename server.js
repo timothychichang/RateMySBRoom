@@ -4,7 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 
 import connectDB from './db.js';
-
+import organizationRoutes from './routes/organizationRoutes.js';
 
 dotenv.config();
 
@@ -15,7 +15,7 @@ connectDB();
 app.use(express.json({limit:'1mb'}));
 app.use(bodyParser.urlencoded({ extended: false, limit:'1mb' }));
 
-
+app.use('/', organizationRoutes);
 
 const PORT = process.env.PORT || 8800; 
 
