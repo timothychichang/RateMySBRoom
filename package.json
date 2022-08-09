@@ -16,6 +16,7 @@
     "url": "https://github.com/timothychichang/RateMySBRoom/issues"
   },
   "homepage": "https://github.com/timothychichang/RateMySBRoom#readme",
+  "type": "module",
   "dependencies": {
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
