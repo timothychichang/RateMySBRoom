@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
         description: req.body.description,
         comments: [],
         ratings: [],
-        avgRating: 0,
+        //avgRating: 0,
     });
     if (req.body.image === null) {
         org.image = '';
@@ -56,8 +56,45 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
+router.put('/:id/addComment', async (req, res) => {
+    try {
+        const commentObj = {comment: req.body.comment, user: req.body.userEmail};
+        await organizationModel.updateOne(
+            {_id: req.params.id},
+            { $push: {comments: commentObj} }
+        )
+        res.status(200).send();
+    } catch (err) {
+        console.log(err);
+    }
+})
 
-
+router.put('/:id/addRating', async (req, res) => {
+    try {
+        // update ratings array
+        const ratingObj = {rating: req.body.rating, user: req.body.userEmail};
+        await organizationModel.updateOne(
+            { _id: req.params.id },
+            { $push: {ratings: ratingObj} }
+        )
+        res.status(200).send();
+    } catch (err) {
+        console.log(err);
+    }
+    /*
+    try {
+        // update avgRating
+        const org = await organizationModel.findById(req.params.id);
+        let newAvgRating = (org.avgRating + req.body.rating) / org.ratings.length;
+        console.log(newAvgRating + " = " + org.avgRating + " + " + req.body.rating)
+        org.avgRating = newAvgRating;
+        await org.save();
+        res.status(200).send();
+    } catch (err) {
+        console.log(err);
+    }
+    */
+})
 
 
 

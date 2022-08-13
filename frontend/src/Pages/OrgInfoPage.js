@@ -11,9 +11,9 @@ const OrgInfoPage = () => {
 
     const [org, setOrg] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [rating, setRating] = useState(null);
 
     useEffect(() => {
-
         fetchOrg();
     }, []);
     
@@ -37,17 +37,109 @@ const OrgInfoPage = () => {
         return 'data:image/jpeg;base64,' + base64String;
     }
 
+    function renderComments() {
+        if (org.comments.length === 0) {
+            return (
+                <p>No Comments</p>
+            )
+        }
+        else {
+            return (
+                <div>
+                    <p>User Comments: </p>
+                    {org.comments.map(comment => <div>"{comment.comment}" : {comment.user}</div>)}
+                </div>
+            )
+        }
+    }
+
+    function addNewComment() {
+        return (
+            <div>
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <textarea 
+                            name='newComment' 
+                            id='newComment' 
+                            placeholder='enter a comment'
+                        />
+                    </div>
+                    <button type='submit'>Post</button>
+                </form>
+            </div>
+        )
+    }
+
+    const handleSubmit = async(event) => {
+        event.preventDefault();
+
+        const userComment = document.getElementById('newComment');
+        const commentJSON = {
+            comment: userComment.value,
+            userEmail: 'Test User'
+        }
+        await axios.put(`http://localhost:5000/${id}/addComment`, commentJSON).then((response) => {
+            console.log(response.status);
+        })
+        window.location.reload();
+    } 
+
+    function addNewRating() {
+        return (
+            <div>
+                <label>Add Your Rating</label>
+                <form onSubmit={handleNewRating}>
+                    <select 
+                        name='rating'
+                        onChange={(e) => setRating(e.target.value)}
+                    >
+                        <option value={1}>1</option>
+                        <option value={2}>2</option>
+                        <option value={3}>3</option>
+                        <option value={4}>4</option>
+                        <option value={5}>5</option>
+                    </select>
+                    <button type='submit'>Add</button>
+                </form>
+            </div>
+        )
+    }
+
+    const handleNewRating = async(event) => {
+        event.preventDefault();
+        
+        const userRating = {
+            rating: rating,
+            userEmail: 'Test User'
+        }
+        await axios.put(`http://localhost:5000/${id}/addRating`, userRating).then((response) => {
+            console.log(response.status);
+        })
+        window.location.reload();
+    }
+
+
 
     function renderPage() {
         return (
             <div>
                 <Link to='/'>Back</Link>
                 <h1>{org.name}</h1>
-                <p>{org.description}</p>
+                <p>Description: {org.description}</p>
                 <p>Rating: {org.ratings.length !== 0 ? org.avgRating : '-'}/5</p>
+                <div>
+                    {addNewRating()}
+                </div>
                 <div>
                     {org.image === '' ? "- - NO IMAGE PROVIDED - -" : <img height='200' src={decodeBuffer(org.imagePath.data)}/>}
                 </div>
+                <div>
+                    {addNewComment()}
+                </div>
+                <div>
+                    {renderComments()}
+                </div>
+
             </div>
         )
     }
@@ -56,7 +148,6 @@ const OrgInfoPage = () => {
     return (
         <div>
             {isLoading === true ? "loading..." : renderPage()}            
-            
         </div>
     )
 }
