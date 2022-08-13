@@ -17,6 +17,10 @@ const organizationSchema = new mongoose.Schema({
         type: [Number],
         required: true
     },
+    avgRating: {
+        type: Number,
+        required: true,
+    },
     image: {
         type: String,
         required: false
@@ -32,6 +36,10 @@ const organizationSchema = new mongoose.Schema({
 }
 );
 
+organizationSchema.virtual('imagePath').get(function() {
+    const imageBuffer = new Buffer.from(this.image, 'base64');
+    return imageBuffer;
+})
 
 const organizationModel = mongoose.model('organization', organizationSchema);
 

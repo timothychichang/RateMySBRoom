@@ -19,9 +19,16 @@ router.post('/', async (req, res) => {
         name: req.body.name,
         description: req.body.description,
         comments: [],
-        ratings: []
+        ratings: [],
+        avgRating: 0,
     });
-
+    if (req.body.image === null) {
+        org.image = '';
+    }
+    else {
+        org.image = req.body.image;
+    }
+    
     try {
         const newOrg = await org.save();
         res.send('Successfully saved org');

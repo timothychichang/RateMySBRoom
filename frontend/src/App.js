@@ -1,5 +1,7 @@
 import './App.css';
 import HomePage from './Pages/Home/HomePage.js';
+import AddOrgPage from './Pages/AddOrgPage.js';
+import OrgInfoPage from './Pages/OrgInfoPage.js';
 import {
   BrowserRouter as Router,
   Routes,
@@ -12,6 +14,8 @@ function App() {
       <Router>
         <Routes>
           <Route path='/' element={<HomePage/>}></Route>
+          <Route path='/add' element={<AddOrgPage/>}></Route>
+          <Route path='/:id' element={<OrgInfoPage/>}></Route>
         </Routes>
       </Router>
     </div>
