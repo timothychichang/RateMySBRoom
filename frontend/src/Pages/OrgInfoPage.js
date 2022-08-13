@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
-
+import { decodeBuffer } from '../Javascript/functions.js';
 
 const OrgInfoPage = () => {
     
@@ -28,14 +28,6 @@ const OrgInfoPage = () => {
         }
     }
 
-    function decodeBuffer(buffer) {
-        var base64String = btoa(
-            new Uint8Array(buffer)
-              .reduce((data, byte) => data + String.fromCharCode(byte), '')
-        );
-
-        return 'data:image/jpeg;base64,' + base64String;
-    }
 
     function renderComments() {
         if (org.comments.length === 0) {
@@ -45,7 +37,7 @@ const OrgInfoPage = () => {
         }
         else {
             return (
-                <div>
+                <div key={org._id}>
                     <p>User Comments: </p>
                     {org.comments.map(comment => <div>"{comment.comment}" : {comment.user}</div>)}
                 </div>
