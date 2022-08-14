@@ -1,5 +1,5 @@
 import express from 'express';
-import organizationModel from '../models/organizationModel.js';
+import apartmentModel from '../models/apartmentModel.js';
 
 
 const router = express.Router();
@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
-        const orgs = await organizationModel.find({});
+        const orgs = await apartmentModel.find({});
         res.send(orgs);
     } catch (err) {
         console.log(err);
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    const org = new organizationModel({
+    const org = new apartmentModel({
         name: req.body.name,
         description: req.body.description,
         comments: [],
@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const org = await organizationModel.findById(req.params.id);
+        const org = await apartmentModel.findById(req.params.id);
         res.send(org);
     } catch (err) {
         console.log(err);
@@ -48,7 +48,7 @@ router.get('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try {
-        const org = await organizationModel.findById(req.params.id);
+        const org = await apartmentModel.findById(req.params.id);
         await org.remove();
         res.send('Successfully deleted');
     } catch (err) {
@@ -59,7 +59,7 @@ router.delete('/:id', async (req, res) => {
 router.put('/:id/addComment', async (req, res) => {
     try {
         const commentObj = {comment: req.body.comment, user: req.body.userEmail};
-        await organizationModel.updateOne(
+        await apartmentModel.updateOne(
             {_id: req.params.id},
             { $push: {comments: commentObj} }
         )
@@ -71,7 +71,7 @@ router.put('/:id/addComment', async (req, res) => {
 
 router.put('/:id/delComment', async (req, res) => {
     try {
-        await organizationModel.updateOne(
+        await apartmentModel.updateOne(
             { _id: req.params.id },
             { $pull: {comments: req.body} }
         )
@@ -85,7 +85,7 @@ router.put('/:id/addRating', async (req, res) => {
     try {
         // update ratings array
         const ratingObj = {rating: req.body.rating, user: req.body.userEmail};
-        await organizationModel.updateOne(
+        await apartmentModel.updateOne(
             { _id: req.params.id },
             { $push: {ratings: ratingObj} }
         )

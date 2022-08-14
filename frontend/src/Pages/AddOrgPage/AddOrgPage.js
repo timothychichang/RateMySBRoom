@@ -47,10 +47,10 @@ const AddOrgPage = () => {
     return (
         <div>
             <Link to='/'>Back</Link>
-            <h1>Add an Organization</h1>
+            <h1>Add an Apartment</h1>
             <div>
                 <form onSubmit={handleSubmit}>  
-                    <p>Post Organization Form</p>
+                    <p>Post Apartment Form</p>
                     <div>
                         <label>Name: </label>
                         <input

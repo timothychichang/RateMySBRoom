@@ -1,7 +1,7 @@
 import './App.css';
-import HomePage from './Pages/Home/HomePage.js';
-import AddOrgPage from './Pages/AddOrgPage.js';
-import OrgInfoPage from './Pages/OrgInfoPage.js';
+import HomePage from './Pages/HomePage/HomePage.js';
+import AddOrgPage from './Pages/AddOrgPage/AddOrgPage.js';
+import OrgInfoPage from './Pages/OrgInfoPage/OrgInfoPage.js';
 import {
   BrowserRouter as Router,
   Routes,

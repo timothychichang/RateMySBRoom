@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
-import { decodeBuffer } from '../Javascript/functions.js';
+import { decodeBuffer } from '../../Javascript/functions.js';
 
 const OrgInfoPage = () => {
     
@@ -20,6 +20,11 @@ const OrgInfoPage = () => {
         fetchOrg();
 
         /* global google */ 
+        loginGoogle();
+        
+    }, []);
+
+    function loginGoogle() {
         // sign in user or restore user data from localStorage
         const userData = window.localStorage.getItem('USER');
         if (userData === null) {
@@ -36,7 +41,7 @@ const OrgInfoPage = () => {
             setUser(JSON.parse(userData));
             console.log("already signed in");
         }
-    }, []);
+    }
 
     function handleCallbackResponse(response) {
         //console.log("Encoded token: " + response.credential);
@@ -78,7 +83,10 @@ const OrgInfoPage = () => {
                     {org.comments.map(comment => 
                         <div>
                             "{comment.comment}" : {comment.user}
-                            <button onClick={() => deleteComment(comment)}> x </button>
+                            <div>
+                                {(user !== null && comment.user === user.email) ? 
+                                    <button onClick={() => deleteComment(comment)}> x </button> : null}
+                            </div>
                         </div>)}
                 </div>
             )

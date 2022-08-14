@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const organizationSchema = new mongoose.Schema({
+const apartmentSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -36,12 +36,12 @@ const organizationSchema = new mongoose.Schema({
 }
 );
 
-organizationSchema.virtual('imagePath').get(function() {
+apartmentSchema.virtual('imagePath').get(function() {
     const imageBuffer = new Buffer.from(this.image, 'base64');
     return imageBuffer;
 })
 
-organizationSchema.virtual('avgRating').get(function() {
+apartmentSchema.virtual('avgRating').get(function() {
 
     if (this.ratings.length > 0) {
         let sumRating = 0;
@@ -57,6 +57,6 @@ organizationSchema.virtual('avgRating').get(function() {
 
 })
 
-const organizationModel = mongoose.model('organization', organizationSchema);
+const apartmentModel = mongoose.model('apartment', apartmentSchema);
 
-export default organizationModel;
+export default apartmentModel;

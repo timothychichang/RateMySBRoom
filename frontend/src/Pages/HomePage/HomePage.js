@@ -91,7 +91,7 @@ const HomePage = () => {
                 {user === null ? null : <button onClick={()=>handleSignOut()}>Sign Out</button>}
             </div>
             <h1>HOME PAGE</h1>
-            <Link to='/add'>Add Organization</Link> 
+            <Link to='/add'>Add Apartment</Link> 
             <div>
                 {isLoading === true ? 'loading...' : renderList()}
             </div>
