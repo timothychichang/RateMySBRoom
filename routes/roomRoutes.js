@@ -1,5 +1,5 @@
 import express from 'express';
-import apartmentModel from '../models/apartmentModel.js';
+import roomModel from '../models/roomModel.js';
 
 
 const router = express.Router();
@@ -7,31 +7,28 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
-        const orgs = await apartmentModel.find({});
-        res.send(orgs);
+        const rooms = await roomModel.find({});
+        res.send(room);
     } catch (err) {
         console.log(err);
     }
 })
 
 router.post('/', async (req, res) => {
-    const org = new apartmentModel({
+    const room = new roomModel({
         name: req.body.name,
-        description: req.body.description,
-        comments: [],
-        ratings: [],
-        //avgRating: 0,
+        reviews: []
     });
     if (req.body.image === null) {
-        org.image = '';
+        room.image = '';
     }
     else {
-        org.image = req.body.image;
+        room.image = req.body.image;
     }
     
     try {
-        const newOrg = await org.save();
-        res.send('Successfully saved org');
+        const newRoom = await room.save();
+        res.send('Successfully saved');
     } catch (err) {
         console.log(err);
     }
@@ -39,8 +36,8 @@ router.post('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const org = await apartmentModel.findById(req.params.id);
-        res.send(org);
+        const room = await roomModel.findById(req.params.id);
+        res.send(room);
     } catch (err) {
         console.log(err);
     }
@@ -48,14 +45,35 @@ router.get('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try {
-        const org = await apartmentModel.findById(req.params.id);
-        await org.remove();
+        const room = await roomModel.findById(req.params.id);
+        await room.remove();
         res.send('Successfully deleted');
     } catch (err) {
         console.log(err);
     }
 })
 
+// add new user review
+router.put('/:id', async (req, res) => {
+    try {
+        const reviewObj = {
+            rating: req.body.userRating,
+            comment: req.body.userComment,
+            user: req.body.userEmail 
+        }
+        await roomModel.updateOne(
+            {_id: req.params.id },
+            { $push: {reviews: reviewObj} }
+        )
+        res.status(200).send();
+    } catch (err) {
+        console.log(err);
+    }
+})
+
+
+
+/*
 router.put('/:id/addComment', async (req, res) => {
     try {
         const commentObj = {comment: req.body.comment, user: req.body.userEmail};
@@ -94,7 +112,7 @@ router.put('/:id/addRating', async (req, res) => {
         console.log(err);
     }
 })
-
+*/
 
 
 

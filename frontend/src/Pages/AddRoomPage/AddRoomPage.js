@@ -13,9 +13,9 @@ registerPlugin(FilePondPluginImagePreview,
                 FilePondPluginFileEncode
 );
 
-const AddOrgPage = () => {
+const AddRoomPage = () => {
 
-    const [orgName, setOrgName] = useState('');
+    const [roomName, setRoomName] = useState('');
     const [files, setFiles] = useState([]);
 
 
@@ -31,12 +31,12 @@ const AddOrgPage = () => {
             imageEncodedFile = files[0].getFileEncodeBase64String();
         }
 
-        const userOrg = {
-            name: orgName,
+        const userRoom = {
+            name: roomName,
             description: userDescription.value,
             image: imageEncodedFile
         };
-        await axios.post('http://localhost:5000', userOrg).then((response) => {
+        await axios.post('http://localhost:5000', userRoom).then((response) => {
             console.log(response.status);
         });
         window.location.reload();
@@ -55,10 +55,10 @@ const AddOrgPage = () => {
                         <label>Name: </label>
                         <input
                             type='text'
-                            name='orgName'
+                            name='roomName'
                             placeholder='enter a name...'
-                            value={orgName}
-                            onChange={(e) => setOrgName(e.target.value)}         
+                            value={roomName}
+                            onChange={(e) => setRoomName(e.target.value)}         
                         />
                     </div>
                     <div>
@@ -82,4 +82,4 @@ const AddOrgPage = () => {
     )
 }
 
-export default AddOrgPage;
+export default AddRoomPage;

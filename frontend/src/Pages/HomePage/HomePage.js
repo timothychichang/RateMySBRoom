@@ -7,13 +7,13 @@ import { decodeBuffer } from '../../Javascript/functions.js';
 
 const HomePage = () => {
 
-    const [orgs, setOrgs] = useState([]);
+    const [rooms, setRooms] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        fetchOrgs();
+        fetchRooms();
 
         /* global google */ 
         // sign in user or restore user data from localStorage
@@ -50,11 +50,11 @@ const HomePage = () => {
     }
 
     
-    const fetchOrgs = async() => {
+    const fetchRooms = async() => {
         try {
             await axios.get('http://localhost:5000')
                         .then((res) => { 
-                            setOrgs(res.data);
+                            setRooms(res.data);
                             setIsLoading(false);                
                         })  
         } catch (err) {
@@ -67,16 +67,16 @@ const HomePage = () => {
         return (
             <div>
                 <div>
-                    {orgs.map(org => (
-                        <div key={org._id}>
-                            <h3>{org.name}</h3>
-                            <p>Rating: {org.ratings.length > 0 ? org.avgRating : '-'}/5</p>
-                            <p>{org.description}</p>
+                    {rooms.map(room => (
+                        <div key={room._id}>
+                            <h3>{room.name}</h3>
+                            <p>Rating: {room.ratings.length > 0 ? room.avgRating : '-'}/5</p>
+                            <p>{room.description}</p>
                             <div>
-                                {org.image === '' ? 
-                                    "- - NO IMAGE PROVIDED - -" : <img height='200' src={decodeBuffer(org.imagePath.data)}/>}
+                                {room.image === '' ? 
+                                    "- - NO IMAGE PROVIDED - -" : <img height='200' src={decodeBuffer(room.imagePath.data)}/>}
                             </div>
-                            <Link to={`/${org._id}`}>More Details</Link>
+                            <Link to={`/${room._id}`}>More Details</Link>
                         </div>
                     ))}
                 </div>

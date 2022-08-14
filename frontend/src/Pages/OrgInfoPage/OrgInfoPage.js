@@ -5,19 +5,19 @@ import { Link, useParams } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import { decodeBuffer } from '../../Javascript/functions.js';
 
-const OrgInfoPage = () => {
+const RoomInfoPage = () => {
     
     // unique path for org
     const { id } = useParams();
 
-    const [org, setOrg] = useState([]);
+    const [room, setRoom] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [rating, setRating] = useState(null);
 
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        fetchOrg();
+        fetchRoom();
 
         /* global google */ 
         loginGoogle();
@@ -58,11 +58,11 @@ const OrgInfoPage = () => {
     }
     
 
-    const fetchOrg = async() => {
+    const fetchRoom = async() => {
         try {
             await axios.get(`http://localhost:5000/${id}`)
                         .then((res) => { 
-                            setOrg(res.data); 
+                            setRoom(res.data); 
                             setIsLoading(false);})  
         } catch (err) {
             console.log(err);
@@ -71,16 +71,16 @@ const OrgInfoPage = () => {
 
 
     function renderComments() {
-        if (org.comments.length === 0) {
+        if (room.comments.length === 0) {
             return (
                 <p>No Comments</p>
             )
         }
         else {
             return (
-                <div key={org._id}>
+                <div key={room._id}>
                     <p>User Comments: </p>
-                    {org.comments.map(comment => 
+                    {room.comments.map(comment => 
                         <div>
                             "{comment.comment}" : {comment.user}
                             <div>
@@ -176,14 +176,14 @@ const OrgInfoPage = () => {
         return (
             <div>
                 <Link to='/'>Back</Link>
-                <h1>{org.name}</h1>
-                <p>Description: {org.description}</p>
-                <p>Rating: {org.ratings.length !== 0 ? org.avgRating : '-'}/5</p>
+                <h1>{room.name}</h1>
+                <p>Description: {room.description}</p>
+                <p>Rating: {room.ratings.length !== 0 ? room.avgRating : '-'}/5</p>
                 <div>
                     {addNewRating()}
                 </div>
                 <div>
-                    {org.image === '' ? "- - NO IMAGE PROVIDED - -" : <img height='200' src={decodeBuffer(org.imagePath.data)}/>}
+                    {room.image === '' ? "- - NO IMAGE PROVIDED - -" : <img height='200' src={decodeBuffer(room.imagePath.data)}/>}
                 </div>
                 <div>
                     {addNewComment()}
@@ -208,4 +208,4 @@ const OrgInfoPage = () => {
     )
 }
 
-export default OrgInfoPage;
+export default RoomInfoPage;
