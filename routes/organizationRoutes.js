@@ -69,6 +69,18 @@ router.put('/:id/addComment', async (req, res) => {
     }
 })
 
+router.put('/:id/delComment', async (req, res) => {
+    try {
+        await organizationModel.updateOne(
+            { _id: req.params.id },
+            { $pull: {comments: req.body} }
+        )
+        res.status(200).send(); 
+    } catch (err) {
+        console.log(err);
+    }
+})
+
 router.put('/:id/addRating', async (req, res) => {
     try {
         // update ratings array
@@ -81,19 +93,6 @@ router.put('/:id/addRating', async (req, res) => {
     } catch (err) {
         console.log(err);
     }
-    /*
-    try {
-        // update avgRating
-        const org = await organizationModel.findById(req.params.id);
-        let newAvgRating = (org.avgRating + req.body.rating) / org.ratings.length;
-        console.log(newAvgRating + " = " + org.avgRating + " + " + req.body.rating)
-        org.avgRating = newAvgRating;
-        await org.save();
-        res.status(200).send();
-    } catch (err) {
-        console.log(err);
-    }
-    */
 })
 
 

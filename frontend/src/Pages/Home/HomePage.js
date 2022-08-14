@@ -50,7 +50,6 @@ const HomePage = () => {
     }
 
     
-
     const fetchOrgs = async() => {
         try {
             await axios.get('http://localhost:5000')
@@ -74,7 +73,8 @@ const HomePage = () => {
                             <p>Rating: {org.ratings.length > 0 ? org.avgRating : '-'}/5</p>
                             <p>{org.description}</p>
                             <div>
-                                {org.image === '' ? "- - NO IMAGE PROVIDED - -" : <img height='200' src={decodeBuffer(org.imagePath.data)}/>}
+                                {org.image === '' ? 
+                                    "- - NO IMAGE PROVIDED - -" : <img height='200' src={decodeBuffer(org.imagePath.data)}/>}
                             </div>
                             <Link to={`/${org._id}`}>More Details</Link>
                         </div>

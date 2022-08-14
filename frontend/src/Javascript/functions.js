@@ -1,4 +1,3 @@
-
 export function decodeBuffer(buffer) {
     var base64String = btoa(
         new Uint8Array(buffer)

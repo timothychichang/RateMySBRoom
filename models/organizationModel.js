@@ -49,7 +49,7 @@ organizationSchema.virtual('avgRating').get(function() {
             sumRating = sumRating + userRating.rating;
         }
         const avgRating = sumRating / this.ratings.length;
-        return avgRating;
+        return avgRating.toFixed(1);
     }
     else {
         return null;
