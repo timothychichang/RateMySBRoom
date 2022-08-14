@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     try {
         const rooms = await roomModel.find({});
-        res.send(room);
+        res.send(rooms);
     } catch (err) {
         console.log(err);
     }
@@ -17,7 +17,8 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     const room = new roomModel({
         name: req.body.name,
-        reviews: []
+        reviews: [],
+        numReviews: 0
     });
     if (req.body.image === null) {
         room.image = '';
@@ -61,10 +62,16 @@ router.put('/:id', async (req, res) => {
             comment: req.body.userComment,
             user: req.body.userEmail 
         }
+
         await roomModel.updateOne(
             {_id: req.params.id },
             { $push: {reviews: reviewObj} }
         )
+
+        let room = await roomModel.findById(req.params.id);
+        room.numReviews = room.numReviews + 1;
+        await room.save();
+
         res.status(200).send();
     } catch (err) {
         console.log(err);

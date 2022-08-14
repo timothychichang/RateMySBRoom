@@ -177,19 +177,18 @@ const RoomInfoPage = () => {
             <div>
                 <Link to='/'>Back</Link>
                 <h1>{room.name}</h1>
-                <p>Description: {room.description}</p>
-                <p>Rating: {room.ratings.length !== 0 ? room.avgRating : '-'}/5</p>
+                <p>Rating: {room.reviews.length !== 0 ? room.avgRating : '-'}/5</p>
                 <div>
-                    {addNewRating()}
+                    {/*addNewRating()*/}
                 </div>
                 <div>
                     {room.image === '' ? "- - NO IMAGE PROVIDED - -" : <img height='200' src={decodeBuffer(room.imagePath.data)}/>}
                 </div>
                 <div>
-                    {addNewComment()}
+                    {/*addNewComment()*/}
                 </div>
                 <div>
-                    {renderComments()}
+                    {/*renderComments()*/}
                 </div>
 
             </div>

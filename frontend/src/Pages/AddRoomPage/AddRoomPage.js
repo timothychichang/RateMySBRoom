@@ -22,7 +22,6 @@ const AddRoomPage = () => {
     const handleSubmit = async(e) => {
         e.preventDefault();
 
-        const userDescription = document.getElementById('description');
         let imageEncodedFile;
         if (files.length === 0) {
             imageEncodedFile = null;
@@ -33,7 +32,6 @@ const AddRoomPage = () => {
 
         const userRoom = {
             name: roomName,
-            description: userDescription.value,
             image: imageEncodedFile
         };
         await axios.post('http://localhost:5000', userRoom).then((response) => {
@@ -60,10 +58,6 @@ const AddRoomPage = () => {
                             value={roomName}
                             onChange={(e) => setRoomName(e.target.value)}         
                         />
-                    </div>
-                    <div>
-                        <label>Description: </label>
-                        <textarea name='description' id='description'></textarea>
                     </div>
                     <div>
                         <FilePond

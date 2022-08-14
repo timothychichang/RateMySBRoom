@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
-import { decodeBuffer } from '../../Javascript/functions.js';
+import RoomContainer from '../../Components/RoomContainer.js';
 
 
 const HomePage = () => {
@@ -16,6 +16,11 @@ const HomePage = () => {
         fetchRooms();
 
         /* global google */ 
+        loginGoogle();
+        
+    }, []);
+
+    function loginGoogle() {
         // sign in user or restore user data from localStorage
         const userData = window.localStorage.getItem('USER');
         if (userData === null) {
@@ -32,8 +37,7 @@ const HomePage = () => {
             setUser(JSON.parse(userData));
             console.log("already signed in");
         }
-            
-    }, []);
+    }
 
     function handleCallbackResponse(response) {
         //console.log("Encoded token: " + response.credential);
@@ -66,20 +70,9 @@ const HomePage = () => {
     function renderList() {
         return (
             <div>
-                <div>
-                    {rooms.map(room => (
-                        <div key={room._id}>
-                            <h3>{room.name}</h3>
-                            <p>Rating: {room.ratings.length > 0 ? room.avgRating : '-'}/5</p>
-                            <p>{room.description}</p>
-                            <div>
-                                {room.image === '' ? 
-                                    "- - NO IMAGE PROVIDED - -" : <img height='200' src={decodeBuffer(room.imagePath.data)}/>}
-                            </div>
-                            <Link to={`/${room._id}`}>More Details</Link>
-                        </div>
-                    ))}
-                </div>
+                {rooms.map(room => (
+                    <RoomContainer room={room} />
+                ))}
             </div>
         )
     }
