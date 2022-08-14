@@ -13,7 +13,7 @@ const RoomContainer = (props) => {
                 {props.room.image === '' ? 
                     "- - NO IMAGE PROVIDED - -" : <img height='200' src={decodeBuffer(props.room.imagePath.data)}/>}
             </div>
-            <Link to={`/${props.room.id}`}>Details</Link>
+            <Link to={`/room/${props.room.id}`}>Details</Link>
         </div>
     )
 }

@@ -71,7 +71,7 @@ const HomePage = () => {
         return (
             <div>
                 {rooms.map(room => (
-                    <RoomContainer room={room} />
+                    <RoomContainer key={room._id} room={room} />
                 ))}
             </div>
         )
@@ -84,7 +84,7 @@ const HomePage = () => {
                 {user === null ? null : <button onClick={()=>handleSignOut()}>Sign Out</button>}
             </div>
             <h1>HOME PAGE</h1>
-            <Link to='/add'>Add Apartment</Link> 
+            <Link to='/addRoom'>Add Apartment</Link> 
             <div>
                 {isLoading === true ? 'loading...' : renderList()}
             </div>

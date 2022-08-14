@@ -70,57 +70,7 @@ const RoomInfoPage = () => {
     }
 
 
-    function renderComments() {
-        if (room.comments.length === 0) {
-            return (
-                <p>No Comments</p>
-            )
-        }
-        else {
-            return (
-                <div key={room._id}>
-                    <p>User Comments: </p>
-                    {room.comments.map(comment => 
-                        <div>
-                            "{comment.comment}" : {comment.user}
-                            <div>
-                                {(user !== null && comment.user === user.email) ? 
-                                    <button onClick={() => deleteComment(comment)}> x </button> : null}
-                            </div>
-                        </div>)}
-                </div>
-            )
-        }
-    }
 
-    function addNewComment() {
-        return (
-            <div>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <textarea 
-                            name='newComment' 
-                            id='newComment' 
-                            placeholder='enter a comment'
-                        />
-                    </div>
-                    <button type='submit'>Post</button>
-                </form>
-            </div>
-        )
-    }
-
-    const deleteComment = async(userComment) => {
-        if (user.email === userComment.user) {
-            await axios.put(`http://localhost:5000/${id}/delComment`, userComment).then((response) => {
-                console.log(response.status);
-            })
-            window.location.reload();
-        }
-        else {
-            console.log('invalid delete request')
-        }
-    }
 
     const handleSubmit = async(event) => {
         event.preventDefault();
@@ -136,26 +86,7 @@ const RoomInfoPage = () => {
         window.location.reload();
     } 
 
-    function addNewRating() {
-        return (
-            <div>
-                <label>Add Your Rating</label>
-                <form onSubmit={handleNewRating}>
-                    <select 
-                        name='rating'
-                        onChange={(e) => setRating(e.target.value)}
-                    >
-                        <option value={1}>1</option>
-                        <option value={2}>2</option>
-                        <option value={3}>3</option>
-                        <option value={4}>4</option>
-                        <option value={5}>5</option>
-                    </select>
-                    <button type='submit'>Add</button>
-                </form>
-            </div>
-        )
-    }
+    
 
     const handleNewRating = async(event) => {
         event.preventDefault();
@@ -178,19 +109,11 @@ const RoomInfoPage = () => {
                 <Link to='/'>Back</Link>
                 <h1>{room.name}</h1>
                 <p>Rating: {room.reviews.length !== 0 ? room.avgRating : '-'}/5</p>
-                <div>
-                    {/*addNewRating()*/}
-                </div>
+                <p>Reviews: {room.numReviews}</p>
                 <div>
                     {room.image === '' ? "- - NO IMAGE PROVIDED - -" : <img height='200' src={decodeBuffer(room.imagePath.data)}/>}
                 </div>
-                <div>
-                    {/*addNewComment()*/}
-                </div>
-                <div>
-                    {/*renderComments()*/}
-                </div>
-
+                <Link to={`/addReview/${id}`}>Write a Review</Link>
             </div>
         )
     }

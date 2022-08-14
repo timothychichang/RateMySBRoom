@@ -6,15 +6,6 @@ const roomSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    /*
-    comments: {
-        type: [{ comment: String, user: String }],
-        required: true
-    },
-    ratings: {
-        type: [{ rating: Number, user: String }],
-        required: true
-    },*/
     reviews: {
         type: [{ rating: Number, comment: String, user: String }],
         required: true
@@ -45,12 +36,12 @@ roomSchema.virtual('imagePath').get(function() {
 
 roomSchema.virtual('avgRating').get(function() {
 
-    if (this.reviews.length > 0) {
+    if (this.numReviews > 0) {
         let sumRating = 0;
         for (let userReview of this.reviews) {
             sumRating = sumRating + userReview.rating;
         }
-        const avgRating = sumRating / this.ratings.length;
+        const avgRating = sumRating / this.numReviews;
         return avgRating.toFixed(1);
     }
     else {
