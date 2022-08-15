@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import { decodeBuffer } from '../../Javascript/functions.js';
+import ReviewContainer from '../../Components/ReviewContainer/ReviewContainer.js';
 
 const RoomInfoPage = () => {
     
@@ -12,7 +13,6 @@ const RoomInfoPage = () => {
 
     const [room, setRoom] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [rating, setRating] = useState(null);
 
     const [user, setUser] = useState(null);
 
@@ -70,39 +70,6 @@ const RoomInfoPage = () => {
     }
 
 
-
-
-    const handleSubmit = async(event) => {
-        event.preventDefault();
-
-        const userComment = document.getElementById('newComment');
-        const commentJSON = {
-            comment: userComment.value,
-            userEmail: user.email
-        }
-        await axios.put(`http://localhost:5000/${id}/addComment`, commentJSON).then((response) => {
-            console.log(response.status);
-        })
-        window.location.reload();
-    } 
-
-    
-
-    const handleNewRating = async(event) => {
-        event.preventDefault();
-        
-        const userRating = {
-            rating: rating,
-            userEmail: user.email
-        }
-        await axios.put(`http://localhost:5000/${id}/addRating`, userRating).then((response) => {
-            console.log(response.status);
-        })
-        window.location.reload();
-    }
-
-
-
     function renderPage() {
         return (
             <div>
@@ -114,6 +81,9 @@ const RoomInfoPage = () => {
                     {room.image === '' ? "- - NO IMAGE PROVIDED - -" : <img height='200' src={decodeBuffer(room.imagePath.data)}/>}
                 </div>
                 <Link to={`/addReview/${id}`}>Write a Review</Link>
+                {room.reviews.map(review => (
+                    <ReviewContainer review={review} />
+                ))}
             </div>
         )
     }

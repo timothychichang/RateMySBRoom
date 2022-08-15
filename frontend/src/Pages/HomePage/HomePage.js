@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
-import RoomContainer from '../../Components/RoomContainer.js';
+import RoomContainer from '../../Components/RoomContainer/RoomContainer.js';
 
 
 const HomePage = () => {

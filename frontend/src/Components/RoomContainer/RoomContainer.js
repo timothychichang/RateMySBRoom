@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { decodeBuffer } from '../Javascript/functions.js';
+import { decodeBuffer } from '../../Javascript/functions.js';
 
 const RoomContainer = (props) => {
 
