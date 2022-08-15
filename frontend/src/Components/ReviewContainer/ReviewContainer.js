@@ -15,6 +15,17 @@ const ReviewContainer = (props) => {
         }
     }    
 
+    function renderDeleteButton() {
+        if (props.user === null || props.user.email !== props.review.user) {
+            return null;
+        }
+        else {
+            return (
+                <button onClick={()=>deleteReview(props.review)}>x</button>
+            )
+        }
+    }
+
     return (
         <div>
             <h4>Review</h4>
@@ -22,7 +33,7 @@ const ReviewContainer = (props) => {
             <p>Rating: {props.review.rating}</p>
             <p>Comment: {props.review.comment}</p>
             <div>
-                { props.user === props.review.user ? <button onClick={()=>deleteReview(props.review)}>x</button> : null }
+                {renderDeleteButton()}
             </div>
         </div>
     )

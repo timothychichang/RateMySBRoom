@@ -92,7 +92,7 @@ const RoomInfoPage = () => {
                 </div>
                 <button onClick={()=>handleWriteReview()}>Write a Review</button>
                 {room.reviews.map(review => (
-                    <ReviewContainer review={review} user={user.email} id={id} />
+                    <ReviewContainer review={review} user={user} id={id} />
                 ))}
             </div>
         )
