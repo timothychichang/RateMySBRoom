@@ -55,7 +55,7 @@ router.delete('/:id', async (req, res) => {
 })
 
 // add new user review
-router.put('/:id', async (req, res) => {
+router.put('/addReview/:id', async (req, res) => {
     try {
         const reviewObj = {
             rating: req.body.userRating,
@@ -64,7 +64,7 @@ router.put('/:id', async (req, res) => {
         }
 
         await roomModel.updateOne(
-            {_id: req.params.id },
+            { _id: req.params.id },
             { $push: {reviews: reviewObj} }
         )
 
@@ -78,48 +78,25 @@ router.put('/:id', async (req, res) => {
     }
 })
 
-
-
-/*
-router.put('/:id/addComment', async (req, res) => {
+// delete user review
+router.put('/delReview/:id', async (req, res) => {
     try {
-        const commentObj = {comment: req.body.comment, user: req.body.userEmail};
-        await apartmentModel.updateOne(
-            {_id: req.params.id},
-            { $push: {comments: commentObj} }
+        await roomModel.updateOne(
+            { _id: req.params.id },
+            { $pull: {reviews: req.body} }
         )
+
+        let room = await roomModel.findById(req.params.id);
+        room.numReviews = room.numReviews - 1;
+        await room.save();
+        
         res.status(200).send();
     } catch (err) {
         console.log(err);
     }
 })
 
-router.put('/:id/delComment', async (req, res) => {
-    try {
-        await apartmentModel.updateOne(
-            { _id: req.params.id },
-            { $pull: {comments: req.body} }
-        )
-        res.status(200).send(); 
-    } catch (err) {
-        console.log(err);
-    }
-})
 
-router.put('/:id/addRating', async (req, res) => {
-    try {
-        // update ratings array
-        const ratingObj = {rating: req.body.rating, user: req.body.userEmail};
-        await apartmentModel.updateOne(
-            { _id: req.params.id },
-            { $push: {ratings: ratingObj} }
-        )
-        res.status(200).send();
-    } catch (err) {
-        console.log(err);
-    }
-})
-*/
 
 
 

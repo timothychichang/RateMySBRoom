@@ -8,8 +8,7 @@ const AddReviewPage = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const [room, setRoom] = useState([]);
-    const [userRating, setUserRating] = useState(null);
-
+    
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -40,7 +39,7 @@ const AddReviewPage = () => {
             userComment: userComment.value,
             userEmail: user.email
         };
-        await axios.put(`http://localhost:5000/${id}`, userReview).then((response) => {
+        await axios.put(`http://localhost:5000/addReview/${id}`, userReview).then((response) => {
             console.log(response.status);
         })
         navigate(`/room/${id}`);

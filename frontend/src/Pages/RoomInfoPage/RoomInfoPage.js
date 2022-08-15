@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import { decodeBuffer } from '../../Javascript/functions.js';
 import ReviewContainer from '../../Components/ReviewContainer/ReviewContainer.js';
@@ -10,6 +10,7 @@ const RoomInfoPage = () => {
     
     // unique path for org
     const { id } = useParams();
+    const navigate = useNavigate();
 
     const [room, setRoom] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -69,6 +70,15 @@ const RoomInfoPage = () => {
         }
     }
 
+    function handleWriteReview() {
+        if (user !== null) {
+            navigate(`/addReview/${id}`);
+        }
+        else {
+            console.log('Must be signed in to write review');
+        }
+    }
+
 
     function renderPage() {
         return (
@@ -80,9 +90,9 @@ const RoomInfoPage = () => {
                 <div>
                     {room.image === '' ? "- - NO IMAGE PROVIDED - -" : <img height='200' src={decodeBuffer(room.imagePath.data)}/>}
                 </div>
-                <Link to={`/addReview/${id}`}>Write a Review</Link>
+                <button onClick={()=>handleWriteReview()}>Write a Review</button>
                 {room.reviews.map(review => (
-                    <ReviewContainer review={review} />
+                    <ReviewContainer review={review} user={user.email} id={id} />
                 ))}
             </div>
         )
