@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import Navbar from '../../Components/Navbar/Navbar.js';
+import './AddRoomPage.css';
+
 import { FilePond, registerPlugin } from 'react-filepond';
 import 'filepond/dist/filepond.min.css';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
@@ -44,22 +46,21 @@ const AddRoomPage = () => {
 
     return (
         <div>
-            <Link to='/'>Back</Link>
-            <h1>Add an Apartment</h1>
+            <Navbar/>
+            <h1>Add a New Room</h1>
             <div>
                 <form onSubmit={handleSubmit}>  
-                    <p>Post Apartment Form</p>
                     <div>
-                        <label>Name: </label>
+                        <p>Dorm / Apartment Name: </p>
                         <input
                             type='text'
                             name='roomName'
-                            placeholder='enter a name...'
+                            placeholder='enter name...'
                             value={roomName}
                             onChange={(e) => setRoomName(e.target.value)}         
                         />
                     </div>
-                    <div>
+                    <div className='filepond-container'>
                         <FilePond
                             files={files}
                             onupdatefiles={setFiles}

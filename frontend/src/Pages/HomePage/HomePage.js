@@ -64,7 +64,7 @@ const HomePage = () => {
                 <h1>All Results</h1>
             </div>
             <div>
-                {isLoading === true ? 'loading...' : renderList()}
+                {isLoading === true ? <p className='loading'>loading...</p> : renderList()}
             </div>
         </div> 
     )

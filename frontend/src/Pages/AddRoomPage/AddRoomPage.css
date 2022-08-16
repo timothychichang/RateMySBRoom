@@ -1,0 +1,55 @@
+h1 {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+input {
+    margin: auto;
+    width: 20%;
+    padding: 10px 10px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.19);
+}
+p {
+    margin-bottom:5px;
+    font-size: 15px;
+}
+
+
+button {
+    background-color: white; 
+    color: black;
+    padding: 7px 15px;
+    text-align: center;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 530;
+    font-family: 'Roboto', sans-serif;
+    transition-duration: 0.4s;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    cursor: pointer;
+    
+
+}
+button:hover {
+    background-color: rgb(239, 248, 255);
+    
+}
+
+.filepond-container {
+    /*border: 1px solid black;*/
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: block;
+    cursor: pointer;
+}
+.filepond--root {
+    /*border: 1px solid black;*/
+    width: 40%;
+    position: relative;
+    margin: 30px auto;
+}
+.filepond--root .filepond--drop-label {
+    height: 200px;
+}
