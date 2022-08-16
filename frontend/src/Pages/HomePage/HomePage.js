@@ -17,10 +17,7 @@ const HomePage = () => {
 
     useEffect(() => {
         fetchRooms();
-
         fetchUser();
-        /* global google */ 
-        //loginGoogle();
         
     }, []);
 
@@ -31,40 +28,6 @@ const HomePage = () => {
         }
     }
 
-    /*
-    function loginGoogle() {
-        // sign in user or restore user data from localStorage
-        const userData = window.localStorage.getItem('USER');
-        if (userData === null) {
-            google.accounts.id.initialize({
-                client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-                callback: handleCallbackResponse
-            });
-            google.accounts.id.renderButton(
-                document.getElementById('signInDiv'),
-                { theme: 'outline', size: 'large' }
-            );
-        }
-        else {
-            setUser(JSON.parse(userData));
-            console.log("already signed in");
-        }
-    }
-    function handleCallbackResponse(response) {
-        //console.log("Encoded token: " + response.credential);
-        const userObject = jwtDecode(response.credential);
-        setUser(userObject);
-        window.localStorage.setItem('USER', JSON.stringify(userObject));
-        window.location.reload();   
-    }
-
-    function handleSignOut() {
-        window.localStorage.removeItem('USER');
-        setUser(null);
-        window.location.reload();
-    }
-
-    */
     
     const fetchRooms = async() => {
         try {
@@ -81,7 +44,7 @@ const HomePage = () => {
 
     function renderList() {
         return (
-            <div>
+            <div className='room-container'>
                 {rooms.map(room => (
                     <RoomContainer key={room._id} room={room} />
                 ))}

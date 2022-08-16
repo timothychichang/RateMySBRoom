@@ -1,19 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { decodeBuffer } from '../../Javascript/functions.js';
+import './RoomContainer.css';
 
 const RoomContainer = (props) => {
 
     return (
-        <div>
-            <h3>{props.room.name}</h3>
-            <p>Rating: {props.room.avgRating}/5</p>
-            <p>Reviews: {props.room.numReviews}</p>
+        <div className='container'>
             <div>
                 {props.room.image === '' ? 
                     "- - NO IMAGE PROVIDED - -" : <img height='200' src={decodeBuffer(props.room.imagePath.data)}/>}
             </div>
-            <Link to={`/room/${props.room.id}`}>Details</Link>
+            <div className='info-container'>
+                <Link to={`/room/${props.room.id}`}>{props.room.name}</Link>
+                <p>Rating: {props.room.avgRating}/5</p>
+                <p>Reviews: {props.room.numReviews}</p>
+            </div>
         </div>
     )
 }

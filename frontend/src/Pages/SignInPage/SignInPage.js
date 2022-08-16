@@ -51,7 +51,7 @@ const SignInPage = () => {
                     backgroundRepeat:'no-repeat',backgroundSize:'cover', 
                     backgroundPosition:'bottom', height:'470px', width:'100vw' }}>
             </div>
-            <h1>{isSignedIn === false ? 'Sign In To Add Your Review':'Thanks For Signing In!'}</h1>
+            <h1>{isSignedIn === false ? 'Sign In To Add Your Review':'Start Writing Reviews!'}</h1>
             <div className='signInContainer'>
                 {isSignedIn === false ? <div id='signInDiv'></div> : 
                     <button onClick={()=>signOut()} className='signOut'>Sign Out</button>}

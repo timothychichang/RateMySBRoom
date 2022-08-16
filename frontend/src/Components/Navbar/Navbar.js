@@ -1,47 +1,19 @@
-import React, { useEffect } from 'react';
-import jwtDecode from 'jwt-decode';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 
 const Navbar = () => {
 
+    const [isSignedIn, setIsSignedIn] = useState(false);
+
     useEffect(() => {
-        /* global google */ 
-        loginGoogle();
-        
-    }, []);
-
-    function loginGoogle() {
-        // sign in user or restore user data from localStorage
         const userData = window.localStorage.getItem('USER');
-        if (userData === null) {
-            google.accounts.id.initialize({
-                client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-                callback: handleCallbackResponse
-            });
-            google.accounts.id.renderButton(
-                document.getElementById('signInDiv'),
-                { width: '200', size: 'medium' }
-            );
+        if (userData !== null) { 
+            setIsSignedIn(true);
         }
-        else {
-            console.log("already signed in");
-        }
-    }
-
-    function handleCallbackResponse(response) {
-        const userObject = jwtDecode(response.credential);
-        window.localStorage.setItem('USER', JSON.stringify(userObject));
-        window.location.reload();   
-    }
-
-    function signOut() {
-        window.localStorage.removeItem('USER');
-        window.location.reload();
-    }
+    }, []);
     
-
     return (
         <nav className='nav'>
             <Link to='/' className='site-title'>RateMySBRoom</Link>
@@ -51,7 +23,7 @@ const Navbar = () => {
                         <Link to='/addRoom'>Add Room</Link>
                     </li>
                     <li>
-                        <Link to='/signin'>Sign In</Link>
+                        <Link to='/signin'>{isSignedIn === false ? 'Sign In' : 'Sign Out'}</Link>
                     </li>
                 </ul>
             </div>
