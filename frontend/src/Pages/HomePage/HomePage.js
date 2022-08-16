@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import jwtDecode from 'jwt-decode';
+//import jwtDecode from 'jwt-decode';
 import RoomContainer from '../../Components/RoomContainer/RoomContainer.js';
+import Navbar from '../../Components/Navbar/Navbar.js';
+import wallpaper from '../../Images/UCSBPhoto.jpeg';
+import './HomePage.css';
 
 
 const HomePage = () => {
@@ -15,11 +18,20 @@ const HomePage = () => {
     useEffect(() => {
         fetchRooms();
 
+        fetchUser();
         /* global google */ 
-        loginGoogle();
+        //loginGoogle();
         
     }, []);
 
+    function fetchUser() {
+        const userData = window.localStorage.getItem('USER');
+        if (userData !== null) {
+            setUser(JSON.parse(userData));
+        }
+    }
+
+    /*
     function loginGoogle() {
         // sign in user or restore user data from localStorage
         const userData = window.localStorage.getItem('USER');
@@ -38,7 +50,6 @@ const HomePage = () => {
             console.log("already signed in");
         }
     }
-
     function handleCallbackResponse(response) {
         //console.log("Encoded token: " + response.credential);
         const userObject = jwtDecode(response.credential);
@@ -53,6 +64,7 @@ const HomePage = () => {
         window.location.reload();
     }
 
+    */
     
     const fetchRooms = async() => {
         try {
@@ -79,11 +91,12 @@ const HomePage = () => {
 
     return (
         <div>
-            <div id="signInDiv"></div>
-            <div>
-                {user === null ? null : <button onClick={()=>handleSignOut()}>Sign Out</button>}
+            <Navbar/>
+            <div style={{ backgroundImage:`url(${wallpaper})`,
+                    backgroundRepeat:'no-repeat',backgroundSize:'cover', 
+                    backgroundPosition:'bottom', height:'470px', width:'100vw' }}>
+                <p className='home-title'>Home Page</p>
             </div>
-            <h1>HOME PAGE</h1>
             <Link to='/addRoom'>Add Apartment</Link> 
             <div>
                 {isLoading === true ? 'loading...' : renderList()}
