@@ -2,23 +2,28 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Navbar from '../../Components/Navbar/Navbar.js';
 import './AddRoomPage.css';
+import { useNavigate } from 'react-router-dom';
 
 import { FilePond, registerPlugin } from 'react-filepond';
 import 'filepond/dist/filepond.min.css';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import FilePondPluginFileEncode from 'filepond-plugin-file-encode';
+import FilePondPluginImageResize from 'filepond-plugin-image-resize';
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 
 
 // Register the plugins
 registerPlugin(FilePondPluginImagePreview, 
-                FilePondPluginFileEncode
-);
+                FilePondPluginFileEncode, 
+                FilePondPluginImageResize,
+                FilePondPluginFileValidateSize);
 
 const AddRoomPage = () => {
 
     const [roomName, setRoomName] = useState('');
     const [files, setFiles] = useState([]);
+    const navigate = useNavigate();
 
 
     const handleSubmit = async(e) => {
@@ -39,7 +44,7 @@ const AddRoomPage = () => {
         await axios.post('http://localhost:5000', userRoom).then((response) => {
             console.log(response.status);
         });
-        window.location.reload();
+        navigate('/');
     }
 
     
@@ -67,6 +72,10 @@ const AddRoomPage = () => {
                             allowMultiple={false}
                             maxFiles={1}
                             name="files"
+                            imageResizeTargetWidth='200px'
+                            imageResizeTargetHeight='250px'
+                            imageResizeUpscale={false}
+                            maxFileSize='1MB'
                             labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
                         />
                     </div>
