@@ -1,10 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import Navbar from '../../Components/Navbar/Navbar.js';
 import jwtDecode from 'jwt-decode';
-import { Link } from 'react-router-dom';
-import './Navbar.css';
+import './SignInPage.css';
+import wallpaper from '../../Images/UCSBPhoto.jpeg';
 
 
-const Navbar = () => {
+const SignInPage = () => {
+
+    const [isSignedIn, setIsSignedIn] = useState(false);
 
     useEffect(() => {
         /* global google */ 
@@ -26,7 +29,7 @@ const Navbar = () => {
             );
         }
         else {
-            console.log("already signed in");
+            setIsSignedIn(true);
         }
     }
 
@@ -40,23 +43,21 @@ const Navbar = () => {
         window.localStorage.removeItem('USER');
         window.location.reload();
     }
-    
 
     return (
-        <nav className='nav'>
-            <Link to='/' className='site-title'>RateMySBRoom</Link>
-            <div className='nav-menu'>
-                <ul>
-                    <li>
-                        <Link to='/addRoom'>Add Room</Link>
-                    </li>
-                    <li>
-                        <Link to='/signin'>Sign In</Link>
-                    </li>
-                </ul>
+        <div>
+            <Navbar/>
+            <div style={{ backgroundImage:`url(${wallpaper})`,
+                    backgroundRepeat:'no-repeat',backgroundSize:'cover', 
+                    backgroundPosition:'bottom', height:'470px', width:'100vw' }}>
             </div>
-        </nav>
+            <h1>{isSignedIn === false ? 'Sign In To Add Your Review':'Thanks For Signing In!'}</h1>
+            <div className='signInContainer'>
+                {isSignedIn === false ? <div id='signInDiv'></div> : 
+                    <button onClick={()=>signOut()} className='signOut'>Sign Out</button>}
+            </div>
+        </div>
     )
 }
 
-export default Navbar;
+export default SignInPage;

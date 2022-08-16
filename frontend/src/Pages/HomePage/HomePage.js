@@ -97,7 +97,6 @@ const HomePage = () => {
                     backgroundPosition:'bottom', height:'470px', width:'100vw' }}>
                 <p className='home-title'>Home Page</p>
             </div>
-            <Link to='/addRoom'>Add Apartment</Link> 
             <div>
                 {isLoading === true ? 'loading...' : renderList()}
             </div>

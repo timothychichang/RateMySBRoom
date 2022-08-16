@@ -41,24 +41,3 @@
 }
 
 
-
-.signOut {
-    background-color: white; 
-    color: black;
-    padding: 7px 15px;
-    text-align: center;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 530;
-    font-family: 'Roboto', sans-serif;
-    transition-duration: 0.4s;
-    border: 1px solid lightgray;
-    border-radius: 4px;
-    cursor: pointer;
-    
-
-}
-.signOut:hover {
-    background-color: rgb(239, 248, 255);
-    
-}
