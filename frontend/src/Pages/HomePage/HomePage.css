@@ -11,6 +11,13 @@
     
 }
 
+.list-title {
+    /*border: 1px solid blue;*/
+}
+.list-title h1 {
+    margin-top: 20px;
+}
+
 .room-container {
     /*border: 1px solid blue*/
 }

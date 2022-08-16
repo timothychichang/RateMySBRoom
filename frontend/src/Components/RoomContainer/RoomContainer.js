@@ -9,12 +9,13 @@ const RoomContainer = (props) => {
         <div className='container'>
             <div>
                 {props.room.image === '' ? 
-                    "- - NO IMAGE PROVIDED - -" : <img height='200' src={decodeBuffer(props.room.imagePath.data)}/>}
+                    "- - NO IMAGE PROVIDED - -" : <img src={decodeBuffer(props.room.imagePath.data)}/>
+                }
             </div>
             <div className='info-container'>
                 <Link to={`/room/${props.room.id}`}>{props.room.name}</Link>
-                <p>Rating: {props.room.avgRating}/5</p>
-                <p>Reviews: {props.room.numReviews}</p>
+                <p>Rating: {props.room.avgRating} / 5</p>
+                {props.room.numReviews === 1 ? <p>{props.room.numReviews} Review</p> : <p>{props.room.numReviews} Reviews</p>}
             </div>
         </div>
     )

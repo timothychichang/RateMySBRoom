@@ -60,6 +60,9 @@ const HomePage = () => {
                     backgroundPosition:'bottom', height:'470px', width:'100vw' }}>
                 <p className='home-title'>Home Page</p>
             </div>
+            <div className='list-title'>
+                <h1>All Results</h1>
+            </div>
             <div>
                 {isLoading === true ? 'loading...' : renderList()}
             </div>
