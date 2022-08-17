@@ -31,20 +31,35 @@ const AddRoomPage = () => {
 
         let imageEncodedFile;
         if (files.length === 0) {
+            // no image uploaded
             imageEncodedFile = null;
+            const userRoom = {
+                name: roomName,
+                image: imageEncodedFile
+            };
+            await axios.post('http://localhost:5000', userRoom).then((response) => {
+                console.log(response.status);
+            });
+            navigate('/');
         }
         else {
-            imageEncodedFile = files[0].getFileEncodeBase64String();
+            // image uploaded
+            if (files[0].fileSize > 1000000) {
+                console.log('file size too large')
+            }
+            else {
+                imageEncodedFile = files[0].getFileEncodeBase64String();
+                const userRoom = {
+                    name: roomName,
+                    image: imageEncodedFile
+                };
+                
+                await axios.post('http://localhost:5000', userRoom).then((response) => {
+                    console.log(response.status);
+                });
+                navigate('/');
+            }   
         }
-
-        const userRoom = {
-            name: roomName,
-            image: imageEncodedFile
-        };
-        await axios.post('http://localhost:5000', userRoom).then((response) => {
-            console.log(response.status);
-        });
-        navigate('/');
     }
 
     
