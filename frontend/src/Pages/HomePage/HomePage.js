@@ -11,21 +11,10 @@ const HomePage = () => {
     const [rooms, setRooms] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    const [user, setUser] = useState(null);
-
     useEffect(() => {
         fetchRooms();
-        fetchUser();
         
     }, []);
-
-    function fetchUser() {
-        const userData = window.localStorage.getItem('USER');
-        if (userData !== null) {
-            setUser(JSON.parse(userData));
-        }
-    }
-
     
     const fetchRooms = async() => {
         try {

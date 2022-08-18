@@ -28,9 +28,13 @@ const AddRoomPage = () => {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-
         let imageEncodedFile;
-        if (files.length === 0) {
+
+        if (roomName === '') {
+            // no name entered
+            console.log('Please enter a name')
+        }
+        else if (files.length === 0) {
             // no image uploaded
             imageEncodedFile = null;
             const userRoom = {

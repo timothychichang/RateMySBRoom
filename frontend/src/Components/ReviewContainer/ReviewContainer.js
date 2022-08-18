@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
+import './ReviewContainer.css';
 
 const ReviewContainer = (props) => {
 
@@ -21,17 +21,18 @@ const ReviewContainer = (props) => {
         }
         else {
             return (
-                <button onClick={()=>deleteReview(props.review)}>x</button>
+                <button className='delete-button' onClick={()=>deleteReview(props.review)}> delete </button>
             )
         }
     }
 
     return (
-        <div>
-            <h4>Review</h4>
-            <p>User: {props.review.user}</p>
-            <p>Rating: {props.review.rating}</p>
-            <p>Comment: {props.review.comment}</p>
+        <div className='review-container'>
+            <div className='review-container-text'>
+                <h1>{props.review.user}</h1>
+                <p className='review-rating'>Rating: {props.review.rating}</p>
+                <p className='review-comment'>{props.review.comment}</p>
+            </div>
             <div>
                 {renderDeleteButton()}
             </div>
