@@ -57,29 +57,30 @@ const AddReviewPage = () => {
                 <form className='review-form' onSubmit={handleSubmit}>
                     <div className='user-review-section'>
                         <div className='rating-section'>
-                            <label>Your Rating: </label>
+                            <label>Your Rating* : </label>
                             <select 
                                 name='userRating'
                                 id='userRating'
                             >
-                                <option selected="selected" value={1}>1</option>
+                                <option selected="selected" value={1}>1 (Terrible)</option>
                                 <option value={2}>2</option>
                                 <option value={3}>3</option>
                                 <option value={4}>4</option>
-                                <option value={5}>5</option>
+                                <option value={5}>5 (Amazing)</option>
                             </select>
                         </div>
                         <div className='comment-section'>
-                            <label>Your Comments: </label>
+                            <label>Your Comments* : </label>
                             <textarea 
                                 name='userComment' 
                                 id='userComment' 
-                                placeholder='add your comments...'
+                                placeholder='Share your thoughts...'
                             />
                         </div>
                     </div>
                     <button type='submit'>Submit</button>
                 </form>
+                <p className='fine-print'>* = required</p>
             </div>
         </div>
     )

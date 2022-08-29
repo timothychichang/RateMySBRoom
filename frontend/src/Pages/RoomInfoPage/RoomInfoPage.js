@@ -1,10 +1,11 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { decodeBuffer } from '../../Javascript/functions.js';
 import ReviewContainer from '../../Components/ReviewContainer/ReviewContainer.js';
 import Navbar from '../../Components/Navbar/Navbar.js';
+import Popup from '../../Components/Popup/Popup.js';
 import './RoomInfoPage.css';
 
 const RoomInfoPage = () => {
@@ -15,6 +16,7 @@ const RoomInfoPage = () => {
 
     const [room, setRoom] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [showPopup, setShowPopup] = useState(false);
 
     const [user, setUser] = useState(null);
 
@@ -48,7 +50,7 @@ const RoomInfoPage = () => {
             navigate(`/addReview/${id}`);
         }
         else {
-            console.log('Must be signed in to write review');
+            setShowPopup(true);
         }
     }
 
@@ -61,6 +63,8 @@ const RoomInfoPage = () => {
             </div>
         )
     }
+
+    
 
     function renderPage() {
         return (
@@ -89,7 +93,8 @@ const RoomInfoPage = () => {
     return (
         <div>
             <Navbar/>
-            {isLoading === true ? <p className='loading'>loading...</p> : renderPage()}            
+            {isLoading === true ? <p className='loading'>loading...</p> : renderPage()}
+            {showPopup === true ? <Popup setShowPopup={setShowPopup} /> : null}         
         </div>
     )
 }

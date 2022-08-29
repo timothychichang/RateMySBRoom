@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from '../../Components/Navbar/Navbar.js';
+import Popup from '../../Components/Popup/Popup.js';
 import './AddRoomPage.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -23,14 +24,29 @@ const AddRoomPage = () => {
 
     const [roomName, setRoomName] = useState('');
     const [files, setFiles] = useState([]);
+    const [showPopup, setShowPopup] = useState(false);
+    const [user, setUser] = useState(null);
     const navigate = useNavigate();
 
+    useEffect(() => {
+        fetchUser();
+    }, []);
+
+    function fetchUser() {
+        const userData = window.localStorage.getItem('USER');
+        if (userData !== null) {
+            setUser(JSON.parse(userData));
+        }
+    }
 
     const handleSubmit = async(e) => {
         e.preventDefault();
         let imageEncodedFile;
-
-        if (roomName === '') {
+        
+        if (user === null) {
+            setShowPopup(true);
+        }
+        else if (roomName === '') {
             // no name entered
             console.log('Please enter a name')
         }
@@ -66,7 +82,6 @@ const AddRoomPage = () => {
         }
     }
 
-    
 
     return (
         <div>
@@ -101,6 +116,7 @@ const AddRoomPage = () => {
                     <button type='submit'>Post</button>
                 </form>
             </div>
+            {showPopup === true ? <Popup setShowPopup={setShowPopup} /> : null}
         </div>
     )
 }
