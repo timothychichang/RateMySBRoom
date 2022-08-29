@@ -17,6 +17,8 @@ const RoomInfoPage = () => {
     const [room, setRoom] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [showPopup, setShowPopup] = useState(false);
+    const [msg, setMsg] = useState('');
+    const [userReviewed, setUserReviewed] = useState(false);
 
     const [user, setUser] = useState(null);
 
@@ -46,11 +48,16 @@ const RoomInfoPage = () => {
     }
 
     function handleWriteReview() {
-        if (user !== null) {
-            navigate(`/addReview/${id}`);
+        if (user === null) {
+            setMsg('Sign in to share your thoughts!');
+            setShowPopup(true);
+        }
+        else if (userReviewed === true) {
+            setMsg(`You've already left a review!`);
+            setShowPopup(true);
         }
         else {
-            setShowPopup(true);
+            navigate(`/addReview/${id}`);
         }
     }
 
@@ -58,7 +65,10 @@ const RoomInfoPage = () => {
         return (
             <div className='reviews-container'>
                     {room.reviews.map(review => (
-                        <ReviewContainer review={review} user={user} id={id} />
+                        <ReviewContainer setUserReviewed={setUserReviewed} 
+                                        review={review} 
+                                        currUser={user} 
+                                        id={id} />
                     ))}
             </div>
         )
@@ -94,7 +104,7 @@ const RoomInfoPage = () => {
         <div>
             <Navbar/>
             {isLoading === true ? <p className='loading'>loading...</p> : renderPage()}
-            {showPopup === true ? <Popup setShowPopup={setShowPopup} /> : null}         
+            {showPopup === true ? <Popup setShowPopup={setShowPopup} msg={msg} /> : null}         
         </div>
     )
 }
