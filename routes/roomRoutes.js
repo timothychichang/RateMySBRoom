@@ -57,12 +57,20 @@ router.delete('/:id', async (req, res) => {
 // add new user review
 router.put('/addReview/:id', async (req, res) => {
     try {
+        const date = new Date();
+        let day = date.getDate();
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+        let formattedDate = `${month}-${day}-${year}`;
+        console.log(formattedDate);
+        
         const reviewObj = {
             rating: req.body.userRating,
             comment: req.body.userComment,
-            user: req.body.userEmail 
+            user: req.body.userEmail,
+            postDate: formattedDate 
         }
-
+        
         await roomModel.updateOne(
             { _id: req.params.id },
             { $push: {reviews: reviewObj} }

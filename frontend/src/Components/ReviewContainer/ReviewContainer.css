@@ -19,6 +19,11 @@
     margin-top: 5px;
     color: black;
 }
+.review-date {
+    margin-top: 2px;
+    font-size: 13px;
+    color: rgb(77, 77, 77);
+}
 .review-comment {
     font-size: 15px;
     color: rgb(77, 77, 77);

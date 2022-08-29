@@ -7,7 +7,7 @@ const roomSchema = new mongoose.Schema({
         required: true
     },
     reviews: {
-        type: [{ rating: Number, comment: String, user: String }],
+        type: [{ rating: Number, comment: String, user: String, postDate: String }],
         required: true
     },
     numReviews: {

@@ -31,6 +31,7 @@ const ReviewContainer = (props) => {
             <div className='review-container-text'>
                 <h1>{props.review.user}</h1>
                 <p className='review-rating'>Rating: {props.review.rating}</p>
+                <p className='review-date'>{props.review.postDate}</p>
                 <p className='review-comment'>{props.review.comment}</p>
             </div>
             <div>
