@@ -75,13 +75,20 @@ const RoomInfoPage = () => {
         )
     }
 
-    
+    const noImage = () => {
+        return (
+            <div className='no-img-container-large'>
+                <p>- - NO IMAGE PROVIDED - -</p>
+            </div>
+        )
+    }
+
 
     function renderPage() {
         return (
             <div>
                 <div className="room-img-container">
-                    {room.image === '' ? "- - NO IMAGE PROVIDED - -" : <img src={decodeBuffer(room.imagePath.data)}/>}
+                    {room.image === '' ? noImage() : <img src={decodeBuffer(room.imagePath.data)}/>}
                 </div>
                 <div className='room-info-container'>
                     <div className='room-info'>

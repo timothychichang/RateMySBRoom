@@ -1,10 +1,9 @@
 import express from 'express';
 import roomModel from '../models/roomModel.js';
 
-
 const router = express.Router();
 
-
+// get all rooms route
 router.get('/', async (req, res) => {
     try {
         const rooms = await roomModel.find({});
@@ -14,12 +13,14 @@ router.get('/', async (req, res) => {
     }
 })
 
+// post room route
 router.post('/', async (req, res) => {
     const room = new roomModel({
         name: req.body.name,
         reviews: [],
         numReviews: 0
     });
+
     if (req.body.image === null) {
         room.image = '';
     }
@@ -35,6 +36,7 @@ router.post('/', async (req, res) => {
     }
 })
 
+// get room by id route
 router.get('/:id', async (req, res) => {
     try {
         const room = await roomModel.findById(req.params.id);
@@ -44,6 +46,7 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+// delete room route
 router.delete('/:id', async (req, res) => {
     try {
         const room = await roomModel.findById(req.params.id);
@@ -54,7 +57,7 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
-// add new user review
+// add new user review route
 router.put('/addReview/:id', async (req, res) => {
     try {
         const date = new Date();
@@ -62,7 +65,6 @@ router.put('/addReview/:id', async (req, res) => {
         let month = date.getMonth() + 1;
         let year = date.getFullYear();
         let formattedDate = `${month}-${day}-${year}`;
-        console.log(formattedDate);
         
         const reviewObj = {
             rating: req.body.userRating,
@@ -81,12 +83,13 @@ router.put('/addReview/:id', async (req, res) => {
         await room.save();
 
         res.status(200).send();
+
     } catch (err) {
         console.log(err);
     }
 })
 
-// delete user review
+// delete user review route
 router.put('/delReview/:id', async (req, res) => {
     try {
         await roomModel.updateOne(
@@ -103,10 +106,6 @@ router.put('/delReview/:id', async (req, res) => {
         console.log(err);
     }
 })
-
-
-
-
 
 
 export default router;

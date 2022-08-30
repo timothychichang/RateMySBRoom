@@ -55,8 +55,17 @@ const AddRoomPage = () => {
         }
         else if (files.length === 0) {
             // no image uploaded
-            setMsg('Please upload an image')
-            setShowPopup(true);
+            //setMsg('Please upload an image')
+            //setShowPopup(true);
+            imageEncodedFile = null;
+            const userRoom = {
+                name: roomName,
+                image: imageEncodedFile
+            };
+            await axios.post('http://localhost:5000', userRoom).then((response) => {
+                console.log(response.status);
+            });
+            navigate('/');
         }
         else {
             // image uploaded

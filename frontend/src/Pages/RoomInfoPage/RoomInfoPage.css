@@ -46,3 +46,16 @@ img {
     color: grey;
     font-size: 18px;
 }
+.no-img-container-large {
+    border: 1px solid grey;
+    height: 400px;
+    width: 700px;
+    margin: auto;
+    
+}
+.no-img-container-large p {
+    margin-top: 200px;
+    font-size: 20px;
+    color: rgb(94, 94, 94);
+    
+}

@@ -5,11 +5,19 @@ import './RoomContainer.css';
 
 const RoomContainer = (props) => {
 
+    const noImage = () => {
+        return (
+            <div className='no-img-container'>
+                <p>- - NO IMAGE PROVIDED - -</p>
+            </div>
+        )
+    }
+
     return (
         <div className='container'>
             <div>
                 {props.room.image === '' ? 
-                    "- - NO IMAGE PROVIDED - -" : <img className='container-img' src={decodeBuffer(props.room.imagePath.data)}/>
+                    noImage() : <img className='container-img' src={decodeBuffer(props.room.imagePath.data)}/>
                 }
             </div>
             <div className='info-container'>

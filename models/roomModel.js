@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 
-
 const roomSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -15,10 +14,6 @@ const roomSchema = new mongoose.Schema({
         required: true
     },
     image: {
-        type: String,
-        required: true
-    },
-    imageType: {
         type: String,
         required: false
     }
