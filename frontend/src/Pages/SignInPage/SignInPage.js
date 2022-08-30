@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../Components/Navbar/Navbar.js';
 import jwtDecode from 'jwt-decode';
+import Footer from '../../Components/Footer/Footer.js';
 import './SignInPage.css';
 import wallpaper from '../../Images/UCSBPhoto.jpeg';
 
@@ -56,6 +57,7 @@ const SignInPage = () => {
                 {isSignedIn === false ? <div id='signInDiv'></div> : 
                     <button onClick={()=>signOut()} className='signOut'>Sign Out</button>}
             </div>
+            <Footer/>
         </div>
     )
 }

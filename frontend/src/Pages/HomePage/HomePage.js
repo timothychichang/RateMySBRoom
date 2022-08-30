@@ -3,6 +3,7 @@ import axios from 'axios';
 import RoomContainer from '../../Components/RoomContainer/RoomContainer.js';
 import Navbar from '../../Components/Navbar/Navbar.js';
 import wallpaper from '../../Images/UCSBPhoto.jpeg';
+import Footer from '../../Components/Footer/Footer.js';
 import './HomePage.css';
 
 
@@ -35,6 +36,7 @@ const HomePage = () => {
                 {rooms.map(room => (
                     <RoomContainer key={room._id} room={room} />
                 ))}
+                <Footer/>
             </div>
         )
     }

@@ -6,6 +6,7 @@ import { decodeBuffer } from '../../Javascript/functions.js';
 import ReviewContainer from '../../Components/ReviewContainer/ReviewContainer.js';
 import Navbar from '../../Components/Navbar/Navbar.js';
 import Popup from '../../Components/Popup/Popup.js';
+import Footer from '../../Components/Footer/Footer.js';
 import './RoomInfoPage.css';
 
 const RoomInfoPage = () => {
@@ -95,6 +96,7 @@ const RoomInfoPage = () => {
                 <div>
                     {room.numReviews === 0 ? <p className='no-reviews'>- - No reviews yet - -</p> : displayReviews()}
                 </div>
+                <Footer/>
             </div>
         )
     }
