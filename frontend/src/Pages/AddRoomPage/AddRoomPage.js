@@ -25,6 +25,7 @@ const AddRoomPage = () => {
     const [roomName, setRoomName] = useState('');
     const [files, setFiles] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
+    const [msg, setMsg] = useState('');
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
 
@@ -44,23 +45,18 @@ const AddRoomPage = () => {
         let imageEncodedFile;
         
         if (user === null) {
+            setMsg('Sign in to share your thoughts!')
             setShowPopup(true);
         }
         else if (roomName === '') {
             // no name entered
-            console.log('Please enter a name')
+            setMsg('Please enter the name of the apartment/dorm')
+            setShowPopup(true);
         }
         else if (files.length === 0) {
             // no image uploaded
-            imageEncodedFile = null;
-            const userRoom = {
-                name: roomName,
-                image: imageEncodedFile
-            };
-            await axios.post('http://localhost:5000', userRoom).then((response) => {
-                console.log(response.status);
-            });
-            navigate('/');
+            setMsg('Please upload an image')
+            setShowPopup(true);
         }
         else {
             // image uploaded
@@ -116,7 +112,7 @@ const AddRoomPage = () => {
                     <button type='submit'>Post</button>
                 </form>
             </div>
-            {showPopup === true ? <Popup setShowPopup={setShowPopup} /> : null}
+            {showPopup === true ? <Popup setShowPopup={setShowPopup} msg={msg}/> : null}
         </div>
     )
 }
