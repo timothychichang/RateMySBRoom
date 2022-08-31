@@ -19,7 +19,7 @@ const HomePage = () => {
     
     const fetchRooms = async() => {
         try {
-            await axios.get('https://ratemysbroom.herokuapp.com/')
+            await axios.get('/')
                         .then((res) => { 
                             setRooms(res.data);
                             setIsLoading(false);                
