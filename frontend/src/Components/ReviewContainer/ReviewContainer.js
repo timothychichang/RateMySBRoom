@@ -11,7 +11,7 @@ const ReviewContainer = ({ setUserReviewed, review, currUser, id }) => {
     }, []);
 
     function checkUserReviewed() {
-        if (currUser.email === review.user) {
+        if (currUser !== null && currUser.email === review.user) {
             setUserReviewed(true);
         }
     }
