@@ -18,7 +18,7 @@ const app = express();
 app.use(cors());
 connectDB();
 
-app.use(express.static(path.resolve(__dirname, '../frontend/build')));
+app.use(express.static('../frontend/build'));
 
 
 app.use(express.json({limit:'1mb'}));
