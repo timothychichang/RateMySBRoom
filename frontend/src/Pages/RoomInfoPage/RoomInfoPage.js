@@ -32,7 +32,7 @@ const RoomInfoPage = () => {
     
     const fetchRoom = async() => {
         try {
-            await axios.get(`/api/${id}`)
+            await axios.get(`http://localhost:8800/api/${id}`)
                         .then((res) => { 
                             setRoom(res.data); 
                             setIsLoading(false);})  

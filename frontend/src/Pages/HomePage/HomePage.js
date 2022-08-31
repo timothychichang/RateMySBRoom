@@ -19,7 +19,7 @@ const HomePage = () => {
     
     const fetchRooms = async() => {
         try {
-            await axios.get('/api')
+            await axios.get('http://localhost:8800/api')
                         .then((res) => { 
                             setRooms(res.data);
                             setIsLoading(false);                

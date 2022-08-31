@@ -9,8 +9,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     try {
         const rooms = await roomModel.find({});
-        console.log("here");
-        res.json(rooms);
+        res.send(rooms);
     } catch (err) {
         console.log(err);
     }

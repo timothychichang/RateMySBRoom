@@ -18,7 +18,7 @@ const ReviewContainer = ({ setUserReviewed, review, currUser, id }) => {
 
     const deleteReview = async(review) => {
         try {
-            await axios.put(`http://localhost:5000/delReview/${id}`, review).then((response) => {
+            await axios.put(`http://localhost:8800/delReview/${id}`, review).then((response) => {
                 console.log(response.status);
             })
             window.location.reload();
