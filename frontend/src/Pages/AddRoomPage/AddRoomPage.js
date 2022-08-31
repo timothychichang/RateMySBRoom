@@ -55,14 +55,12 @@ const AddRoomPage = () => {
         }
         else if (files.length === 0) {
             // no image uploaded
-            //setMsg('Please upload an image')
-            //setShowPopup(true);
             imageEncodedFile = null;
             const userRoom = {
                 name: roomName,
                 image: imageEncodedFile
             };
-            await axios.post('http://localhost:5000', userRoom).then((response) => {
+            await axios.post('/api', userRoom).then((response) => {
                 console.log(response.status);
             });
             navigate('/');
@@ -79,7 +77,7 @@ const AddRoomPage = () => {
                     image: imageEncodedFile
                 };
                 
-                await axios.post('http://localhost:5000', userRoom).then((response) => {
+                await axios.post('/api', userRoom).then((response) => {
                     console.log(response.status);
                 });
                 navigate('/');

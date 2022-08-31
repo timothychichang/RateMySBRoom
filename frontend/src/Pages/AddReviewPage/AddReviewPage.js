@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../../Components/Navbar/Navbar.js';
 import './AddReviewPage.css';
@@ -23,7 +23,7 @@ const AddReviewPage = () => {
 
     const fetchRoom = async() => {
         try {
-            await axios.get(`http://localhost:5000/${id}`).then((res) => {setRoom(res.data)})  
+            await axios.get(`/api/${id}`).then((res) => {setRoom(res.data)})  
         } catch (err) {
             console.log(err);
         }
@@ -40,7 +40,7 @@ const AddReviewPage = () => {
             userComment: userComment.value,
             userEmail: user.email
         };
-        await axios.put(`http://localhost:5000/addReview/${id}`, userReview).then((response) => {
+        await axios.put(`/api/addReview/${id}`, userReview).then((response) => {
             console.log(response.status);
         })
         navigate(`/room/${id}`);
