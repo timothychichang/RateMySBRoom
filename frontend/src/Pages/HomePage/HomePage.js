@@ -31,7 +31,6 @@ const HomePage = () => {
 
 
     function renderList() {
-        console.log(rooms);
         return (
             <div className='room-container'>
                 {rooms.map(room => (

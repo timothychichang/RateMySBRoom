@@ -62,7 +62,7 @@ const AddRoomPage = () => {
                 name: roomName,
                 image: imageEncodedFile
             };
-            await axios.post('http://localhost:8800', userRoom).then((response) => {
+            await axios.post('http://localhost:8800/api', userRoom).then((response) => {
                 console.log(response.status);
             });
             navigate('/');
@@ -79,7 +79,7 @@ const AddRoomPage = () => {
                     image: imageEncodedFile
                 };
                 
-                await axios.post('http://localhost:8800', userRoom).then((response) => {
+                await axios.post('http://localhost:8800/api', userRoom).then((response) => {
                     console.log(response.status);
                 });
                 navigate('/');
