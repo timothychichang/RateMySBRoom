@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false, limit:'1mb' }));
 
 connectDB();
 
-app.use(express.static('build'))
+app.use(express.static('frontend/build'))
 
 app.use('/api', roomRoutes);
 
