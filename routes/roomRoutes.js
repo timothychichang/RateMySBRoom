@@ -1,13 +1,16 @@
 import express from 'express';
 import roomModel from '../models/roomModel.js';
 
+// prepended by /api
+
 const router = express.Router();
 
 // get all rooms route
 router.get('/', async (req, res) => {
     try {
         const rooms = await roomModel.find({});
-        res.send(rooms);
+        console.log("here");
+        res.json(rooms);
     } catch (err) {
         console.log(err);
     }
