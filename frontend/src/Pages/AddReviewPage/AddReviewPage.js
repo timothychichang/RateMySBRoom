@@ -23,7 +23,7 @@ const AddReviewPage = () => {
 
     const fetchRoom = async() => {
         try {
-            await axios.get(`http://localhost:8800/${id}`).then((res) => {setRoom(res.data)})  
+            await axios.get(`http://localhost:8800/api/${id}`).then((res) => {setRoom(res.data)})  
         } catch (err) {
             console.log(err);
         }
@@ -40,7 +40,7 @@ const AddReviewPage = () => {
             userComment: userComment.value,
             userEmail: user.email
         };
-        await axios.put(`http://localhost:8800/addReview/${id}`, userReview).then((response) => {
+        await axios.put(`http://localhost:8800/api/addReview/${id}`, userReview).then((response) => {
             console.log(response.status);
         })
         navigate(`/room/${id}`);
