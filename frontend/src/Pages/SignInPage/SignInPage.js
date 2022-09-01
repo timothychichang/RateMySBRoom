@@ -1,3 +1,4 @@
+/* global google */
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../Components/Navbar/Navbar.js';
 import jwtDecode from 'jwt-decode';
@@ -10,8 +11,7 @@ const SignInPage = () => {
 
     const [isSignedIn, setIsSignedIn] = useState(false);
 
-    useEffect(() => {
-        /* global google */ 
+    useEffect(() => { 
         loginGoogle();
     }, []);
 
