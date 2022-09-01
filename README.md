@@ -2,7 +2,7 @@
 <br />
 <div align="center">
   <a href="https://ratemysbroom.herokuapp.com/">
-    <img src="images/logo.png" alt="Logo" width="80" height="80" />
+    <img src="Images/RateMySBRoomLogo.png" alt="Logo" width="80" height="80" />
   </a>
   <h3 align="center">RateMySBRoom</h3>
 
@@ -15,7 +15,7 @@
 ## About The Project
 
 <div align="center">
-  <img src="images/logo.png" alt="Screenshot" width="80" height="80" />
+  <img src="Images/RateMySBRoomScreenShot.png" alt="Screenshot" height="100" />
 </div>
 
 ### Built With
