@@ -15,7 +15,7 @@
 ## About The Project
 
 <div align="center">
-  <img src="Images/RateMySBRoomScreenShot.png" alt="Screenshot" height="100" />
+  <img src="Images/RateMySBRoomScreenShot.png" alt="Screenshot" height="500" />
 </div>
 
 ### Built With
