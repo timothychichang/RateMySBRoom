@@ -21,7 +21,7 @@ app.use(express.static('frontend/build'));
 app.use('/api', roomRoutes);
 
 app.get('*', (req, res) => {
-    res.sendFile(path.resolve('frontend', 'build', 'index.html')) // relative path
+    res.sendFile(path.resolve('frontend', 'build', 'index.html'))
 })
 
 const PORT = process.env.PORT || 8800; 
