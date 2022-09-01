@@ -18,11 +18,11 @@ connectDB();
 
 app.use(express.static('frontend/build'));
 
+app.use('/api', roomRoutes);
+
 app.get('*', (req, res) => {
     res.sendFile(path.resolve('frontend', 'build', 'index.html')) // relative path
 })
-
-app.use('/api', roomRoutes);
 
 const PORT = process.env.PORT || 8800; 
 
