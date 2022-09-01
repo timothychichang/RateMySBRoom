@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
 
 import connectDB from './db.js';
 import roomRoutes from './routes/roomRoutes.js';
@@ -15,7 +16,11 @@ app.use(bodyParser.urlencoded({ extended: false, limit:'1mb' }));
 
 connectDB();
 
-app.use(express.static('frontend/build'))
+app.use(express.static('frontend/build'));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve('frontend', 'build', 'index.html')) // relative path
+})
 
 app.use('/api', roomRoutes);
 
