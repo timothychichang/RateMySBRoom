@@ -9,10 +9,12 @@
    <p align="center">
      A website designed for UCSB students to share their thoughts and experiences with university-housing as well as apartments in Isla Vista. The dynamic frontend was built using React while the backend server utilizes an ExpressJS framework. This web app is hosted on Heroku and connected to a MongoDB database, where it stores and handles data provided by the users. The integration of Google OAuth helps with user authentication and signing in.
    </p>
+   
+   <div>
+     <p align="center">Check it out here: <a href="https://ratemysbroom.herokuapp.com/">ratemysbroom.herokuapp.com</a> </p>
+   </div>
+   
 </div>
-
-<!-- ABOUT THE PROJECT -->
-## About The Project
 
 <div align="center">
   <img src="Images/RateMySBRoomScreenShot.png" alt="Screenshot" height="500" />
