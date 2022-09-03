@@ -23,7 +23,8 @@ const RoomContainer = (props) => {
             <div className='info-container'>
                 <Link to={`/room/${props.room.id}`}>{props.room.name}</Link>
                 <p>Rating: {props.room.avgRating} / 5</p>
-                {props.room.numReviews === 1 ? <p>{props.room.numReviews} Review</p> : <p>{props.room.numReviews} Reviews</p>}
+                { props.room.numReviews === 1 ? <p>{props.room.numReviews} Review</p> : 
+                                                <p>{props.room.numReviews} Reviews</p> } 
             </div>
         </div>
     )
